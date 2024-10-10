@@ -1,7 +1,7 @@
 #include "Checker.h"
 #include <cassert>
 using namespace std;
- 
+
 void testisBatteryOk() {
     std::string message;
 	std::string warning;
