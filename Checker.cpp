@@ -1,8 +1,5 @@
-#include <iostream>
-#include <cassert>
-#include <string>
-using namespace std;
- 
+#include "Checker.h"
+
 bool isTemperatureWithinRange(float temperature, std::string &message) {
     if (temperature < 0) {
         message = "Temperature too low!";
