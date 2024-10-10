@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
  
-bool checkTemperature(float temperature, std::string &message) {
+bool isTemperatureWithinRange(float temperature, std::string &message) {
     if (temperature < 0) {
         message = "Temperature too low!";
         return false;
@@ -14,7 +14,7 @@ bool checkTemperature(float temperature, std::string &message) {
     return true;
 }
  
-bool checkSOC(float soc, std::string &message) {
+bool isSOCWithinRange(float soc, std::string &message) {
     if (soc < 20) {
         message = "State of Charge too low!";
         return false;
@@ -25,20 +25,31 @@ bool checkSOC(float soc, std::string &message) {
     return true;
 }
  
-bool checkChargeRate(float chargeRate, std::string &message) {
+bool isChargeRateOK(float chargeRate, std::string &message) {
     if (chargeRate > 0.8) {
         message = "Charge Rate too high!";
         return false;
     }
     return true;
 }
+
+bool isTemperatureAndSOCWithinRange(float temperature, float soc, std::string &message) {
+	if(isTemperatureWithinRange(temperature, message) && isSOCWithinRange(soc, message)) {
+		return true;
+	}
+	else {
+		return false;
+	}
+
+}
  
 bool performCheck(float temperature, float soc, float chargeRate, std::string &message) {
-    bool temperatureOk = checkTemperature(temperature, message);
-    bool socOk = checkSOC(soc, message);
-    bool chargeRateOk = checkChargeRate(chargeRate, message);
- 
-    return temperatureOk && socOk && chargeRateOk;
+    if(isTemperatureAndSOCWithinRange(temperature, soc, message) && isChargeRateOK(chargeRate, message)) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
  
 bool batteryIsOk(float temperature, float soc, float chargeRate, std::string &message) {
@@ -46,9 +57,11 @@ bool batteryIsOk(float temperature, float soc, float chargeRate, std::string &me
  
     if (allChecksOk) {
         message = "Battery is OK.";
+		return true;
     }
- 
-    return allChecksOk;
+	else {
+		return false;
+	}
 }
  
 void testBatteryIsOk() {
