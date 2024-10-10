@@ -26,6 +26,16 @@ void testisBatteryOk() {
     assert(message == "Battery is OK.");
 	assert(warning == "Warning: Approaching High temperature! and Warning: Approaching charge-peak!");
 
+	// Test case where battery is OK and display warning of Approaching discharge
+    assert(isBatteryOk(40, 21, 0.7, message, warning) == true);
+    assert(message == "Battery is OK.");
+	assert(warning == "Warning: Approaching discharge!");
+
+	// Test case where battery is OK and display warning of Approaching charge-peak
+    assert(isBatteryOk(40, 78, 0.7, message, warning) == true);
+    assert(message == "Battery is OK.");
+	assert(warning == "Warning: Approaching charge-peak!");
+
     // Test case where temperature is too low
     assert(isBatteryOk(-1, 70, 0.7, message, warning) == false);
     assert(message == "Temperature too low!");
