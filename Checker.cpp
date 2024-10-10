@@ -85,7 +85,7 @@ bool isBatteryOk(float temperature, float soc, float chargeRate, std::string &me
  
     if (allChecksOk) {
         message = "Battery is OK.";
-	    displayWarningIfWithinRange(temperature, soc, chargeRate, warning);
+	    displayWarningIfWithinRange(temperature, soc, warning);
 		return true;
     }
 	else {
