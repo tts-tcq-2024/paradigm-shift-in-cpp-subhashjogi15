@@ -53,30 +53,30 @@ bool performCheck(float temperature, float soc, float chargeRate, std::string &m
 }
 
 void displayLowTempratureWarningIfInRange(float temperature, std::string &warning) {
-	if (temperature > 0) && (temperature < 2.25) {
+	if (((temperature > 0) && (temperature < 2.25)) {
 		warning = "Warning: Approaching Low temperature!";
 	}
 }
 
 void displayHighTempratureWarningIfInRange(float temperature, std::string &warning) {
-	if (temperature > 42.75) && (temperature < 45) {
+	if ((temperature > 42.75) && (temperature < 45)) {
 		warning = "Warning: Approaching High temperature!";
 	}
 }
 
 void displaySOCDischargeWarningIfInRange(float soc, std::string &warning) {
-	if (soc > 20) && (soc < 24) {
+	if ((soc > 20) && (soc < 24)){
 		warning = warning + "and " + "Warning: Approaching discharge!";
 	}
 }
 
 void displaySOCChargePeakWarningIfInRange(float soc, std::string &warning) {
-	if (soc > 76) && (soc < 80) {
+	if ((soc > 76) && (soc < 80)) {
 		warning = warning + "and " + "Warning: Approaching charge-peak!";
 	}
 }
 
-displayWarningIfWithinRange(float temperature, float soc, float chargeRate, std::string &warning) {
+void displayWarningIfWithinRange(float temperature, float soc, float chargeRate, std::string &warning) {
 	displayLowTempratureWarningIfInRange(temperature, warning);
 	displayHighTempratureWarningIfInRange(temperature, warning);
 	displaySOCDischargeWarningIfInRange(soc, warning);
