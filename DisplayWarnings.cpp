@@ -14,13 +14,25 @@ void displayHighTempratureWarningIfInRange(float temperature, std::string &warni
 
 void displaySOCDischargeWarningIfInRange(float soc, std::string &warning) {
 	if ((soc > 20) && (soc < 24)){
-		warning = warning + " and " + "Warning: Approaching discharge!";
+		if (warning != "") {
+	        warning = warning + "and " + "Approaching discharge!";
+	    }
+	    else {
+	        warning = "Warning: Approaching discharge!";
+
+	    }
 	}
 }
 
 void displaySOCChargePeakWarningIfInRange(float soc, std::string &warning) {
 	if ((soc > 76) && (soc < 80)) {
-		warning = warning + " and " + "Warning: Approaching charge-peak!";
+		if (warning != "") {
+	        warning = warning + "and " + "Approaching charge-peak!";
+	    }
+	    else {
+	        warning = "Warning: Approaching charge-peak!";
+
+	    }
 	}
 }
 
