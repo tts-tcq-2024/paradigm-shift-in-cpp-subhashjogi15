@@ -1,4 +1,5 @@
 #include "Checker.h"
+#include "DisplayWarnings.h"
 
 bool isTemperatureWithinRange(float temperature, std::string &message) {
     if (temperature < 0) {
