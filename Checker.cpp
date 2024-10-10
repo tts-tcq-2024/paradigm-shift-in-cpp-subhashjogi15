@@ -53,7 +53,7 @@ bool performCheck(float temperature, float soc, float chargeRate, std::string &m
 }
 
 void displayLowTempratureWarningIfInRange(float temperature, std::string &warning) {
-	if (((temperature > 0) && (temperature < 2.25)) {
+	if ((temperature > 0) && (temperature < 2.25)) {
 		warning = "Warning: Approaching Low temperature!";
 	}
 }
