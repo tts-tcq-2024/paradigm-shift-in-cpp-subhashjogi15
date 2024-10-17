@@ -1,22 +1,63 @@
-#include <assert.h>
-#include <iostream>
-using namespace std;
+#include "Checker.h"
+#include "DisplayWarnings.h"
 
-bool batteryIsOk(float temperature, float soc, float chargeRate) {
-  if(temperature < 0 || temperature > 45) {
-    cout << "Temperature out of range!\n";
-    return false;
-  } else if(soc < 20 || soc > 80) {
-    cout << "State of Charge out of range!\n";
-    return false;
-  } else if(chargeRate > 0.8) {
-    cout << "Charge Rate out of range!\n";
-    return false;
-  }
-  return true;
+bool isTemperatureWithinRange(float temperature, std::string &message) {
+    if (temperature < 0) {
+        message = "Temperature too low!";
+        return false;
+    } else if (temperature > 45) {
+        message = "Temperature too high!";
+        return false;
+    }
+    return true;
+}
+ 
+bool isSOCWithinRange(float soc, std::string &message) {
+    if (soc < 20) {
+        message = "State of Charge too low!";
+        return false;
+    } else if (soc > 80) {
+        message = "State of Charge too high!";
+        return false;
+    }
+    return true;
+}
+ 
+bool isChargeRateOK(float chargeRate, std::string &message) {
+    if (chargeRate > 0.8) {
+        message = "Charge Rate too high!";
+        return false;
+    }
+    return true;
 }
 
-int main() {
-  assert(batteryIsOk(25, 70, 0.7) == true);
-  assert(batteryIsOk(50, 85, 0) == false);
+bool isTemperatureAndSOCWithinRange(float temperature, float soc, std::string &message) {
+	if(isTemperatureWithinRange(temperature, message) && isSOCWithinRange(soc, message)) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+ 
+bool performCheck(float temperature, float soc, float chargeRate, std::string &message) {
+    if(isTemperatureAndSOCWithinRange(temperature, soc, message) && isChargeRateOK(chargeRate, message)) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+ bool isBatteryOk(float temperature, float soc, float chargeRate, std::string &message, std::string &warning) {
+    bool allChecksOk = performCheck(temperature, soc, chargeRate, message);
+ 
+    if (allChecksOk) {
+        message = "Battery is OK.";
+	    displayWarningsforTempratureAndSOC(temperature, soc, warning);
+		return true;
+    }
+	else {
+		return false;
+	}
 }
